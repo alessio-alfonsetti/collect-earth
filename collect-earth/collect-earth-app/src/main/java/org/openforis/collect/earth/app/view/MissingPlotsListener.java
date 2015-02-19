@@ -184,14 +184,14 @@ public final class MissingPlotsListener implements ActionListener {
 			missingPlots += "\n" + Messages.getString("MissingPlotsListener.5") + file + " : \n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			List<String> plotIds = missingPlotIds.get(file);
 			if( plotIds.size() == 0 ){
-				missingPlots += "COMPLETE"; //$NON-NLS-1$
+				missingPlots += "COMPLETE "; //$NON-NLS-1$
 			}
 			
 			for (String plotId : plotIds) {
 				missingPlots += plotId + ","; //$NON-NLS-1$
 			}
 			
-			missingPlots = missingPlots.substring(0, missingPlots.length() - 1 );
+			missingPlots = missingPlots.substring(0, missingPlots.length() - 1 ) + "\n";
 
 		}
 
@@ -271,7 +271,7 @@ public final class MissingPlotsListener implements ActionListener {
 			CollectRecord record = recordManager.load(earthSurveyService.getCollectSurvey(), summaries.get(0).getId(), Step.ENTRY);
 			BooleanAttribute node = null;
 			try {
-				node = (BooleanAttribute) record.getNodeByPath("/plot/actively_saved"); //$NON-NLS-1$
+				node = (BooleanAttribute) record.findNodeByPath("/plot/actively_saved"); //$NON-NLS-1$
 			} catch (Exception e) {
 				logger.error("No actively_saved information found", e); //$NON-NLS-1$
 			}
